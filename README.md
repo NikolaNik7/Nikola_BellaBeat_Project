@@ -81,6 +81,19 @@ Uploaded the following clean data sets:
   - weightLogInfo_merged
 
 5.2 User Verification
-Checked for 
-  
+Checked for the number of participants by counting the number of distinct Id's in each dataset.
+
+SELECT COUNT(DISTINCT Id) AS Total_Id
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
+
+I repeated the SQL query above with each dataset (changing the FROM clause each time) and recieved these results:
+
+Daily_Activity_Merged - 33
+Daily_Sleep_Merged - 24
+Hourly_Calorie_Merged - 33
+Hourly_Intensity_Merged - 33
+Hourly_Steps_Merged - 33
+Weight_Log_Merged - 8
+
+The Weight Log dataset did not include enough data to move forward with analysis. The dataset will not be used.
 
