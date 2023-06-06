@@ -101,9 +101,9 @@ The Weight Log dataset did not include enough data to move forward with analysis
 4.3 User Insights 
 Now I wanted to  breakdown the users by how much they wore their FitBit Fitness Tracker. I created three user types:
 
-Active User - wore their tracker for 25-31 days
-Moderate User - wore their tracker for 15-24 days
-Light User - wore their tracker for 0 to 14 days
+Active User - wore their tracker for 21-31 days
+Moderate User - wore their tracker for 11-20 days
+Light User - wore their tracker for 1 to 10 days
 
 ```
 SELECT Id,
@@ -117,4 +117,5 @@ END Fitbit_Usage_Type
 FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
 GROUP BY Id
 ```
+
 
