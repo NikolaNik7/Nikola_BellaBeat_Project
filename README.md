@@ -44,5 +44,43 @@ The FitBit Fitness Tracker Data was collected in 2016 making the datasets outdat
 
 Lastly, the sample size itself could create a sample bias. While a sample size of 33 will hold up within the CLT theorm, a larger sample size will be more representative of the population and would increase the confidence interval. Additionally, since there were no demographic information collected it will be hard to see if we have a true representation of a national or global population. This lack of demographic information will also limit recommendations on the target audience (including gender, location, age and job status) and where to market to them. Considering that Bellabeat is primarily targeted to women and individuals who menstruate, having demographics would have bolstered any recommendations after analysis.
 
+## 3. Process
+3.1 Datasets Selected 
+  - Daily_Activity_Merged
+  - Daily_Sleep_Merged
+  - Hourly_Steps_Merged
+  - Hourly_Intensity_Merged
+  - Hourly_Calories_Merged
+  - Weight_Log_Merged
 
+3.2 Cleaning Data Via Google Sheets
+ Each dataset was cleaned using Google Sheets. The following steps were taken within each dataset:
+  - Sorted and filtered data by Id to obtain how many unique users there were within the dataset.
+  - Checked for duplicate data using the 'Remove Duplicates' tool in Google sheets 
+  - Formatted date data into MM/DD/YY date format
+  - Formatted all numerical data into Number format with either no decimals or up to 2 decimials.
+  - Sorted by date to find the first and last date of the dataset (this is what first indicated only a 31-day period of activity was captured).
+  - Separated Date and Hour into two columns when needed for later analysis. Utilized Left() function as well as Right() function to split.
+  - Formatted any time data into 00:00:00 format for consistency.
+  - Checked Id entries and other columns for LEN to make sure the data was correct and uniform in length
+  - Used Conditional Formatting to spot any errors that didn't equal to what I had specified 
+  - Used the 'Hide' setting to remove unnecessary columns that contained irrelevant information 
+
+After the cleaning process was finished, only 3 rows of duplicate information was found within the Daily_Sleep_Merged file. These were removed before analysis.
+
+## 4. Analyze
+
+4.1 SQL Dataset Upload 
+Uploaded the following clean data sets:
+
+  - dailyActivity_merged
+  - sleepDay_merged
+  - hourlyCalroie_merged
+  - hourlyIntensity_merged
+  - hourlySteps_merged
+  - weightLogInfo_merged
+
+5.2 User Verification
+Checked for 
+  
 
