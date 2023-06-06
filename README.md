@@ -80,13 +80,12 @@ Uploaded the following clean data sets:
   - hourlySteps_merged
   - weightLogInfo_merged
 
-5.2 User Verification
+4.2 User Verification
 Checked for the number of participants by counting the number of distinct Id's in each dataset.
 ```
-SELECT COUNT (DISTINCT Id) AS Total_Ids 
-FROM `capstone-project-120622.fitbit_tracker_data.daily_activity_merged` 
+SELECT COUNT(DISTINCT Id) AS Total_Id
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
 ```
-
 
 I repeated the SQL query above with each dataset (changing the FROM clause each time) and recieved these results:
 
@@ -98,4 +97,24 @@ Hourly_Steps_Merged - 33
 Weight_Log_Merged - 8
 
 The Weight Log dataset did not include enough data to move forward with analysis. The dataset will not be used.
+
+4.3 User Insights 
+Now I wanted to  breakdown the users by how much they wore their FitBit Fitness Tracker. I created three user types:
+
+Active User - wore their tracker for 25-31 days
+Moderate User - wore their tracker for 15-24 days
+Light User - wore their tracker for 0 to 14 days
+
+```
+SELECT Id,
+COUNT(Id) AS Total_Logged_Uses,
+CASE
+WHEN COUNT(Id) BETWEEN 21 AND 31 THEN 'Active User'
+WHEN COUNT(Id) BETWEEN 11 and 20 THEN 'Moderate User'
+WHEN COUNT(Id) BETWEEN 1 and 10 THEN 'Light User'
+WHEN COUNT(Id) = 0 THEN 'Inactive User'
+END Fitbit_Usage_Type
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
+GROUP BY Id
+```
 
