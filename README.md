@@ -82,9 +82,11 @@ Uploaded the following clean data sets:
 
 5.2 User Verification
 Checked for the number of participants by counting the number of distinct Id's in each dataset.
+```
+SELECT COUNT (DISTINCT Id) AS Total_Ids 
+FROM `capstone-project-120622.fitbit_tracker_data.daily_activity_merged` 
+```
 
-SELECT COUNT(DISTINCT Id) AS Total_Id
-FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
 
 I repeated the SQL query above with each dataset (changing the FROM clause each time) and recieved these results:
 
