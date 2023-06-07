@@ -117,5 +117,167 @@ END Fitbit_Usage_Type
 FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
 GROUP BY Id
 ```
+Insert google sheets link here 
+
+Next, I wanted to take a closer look at the MIN, MAX, & AVG of total steps, total distance, calories and activity levels by Id.
+
+```
+SELECT Id,
+MIN(TotalSteps) AS Min_Total_Steps,
+MAX(TotalSteps) AS Max_Total_Steps, 
+AVG(TotalSteps) AS Avg_Total_Stpes,
+MIN(TotalDistance) AS Min_Total_Distance, 
+MAX(TotalDistance) AS Max_Total_Distance, 
+AVG(TotalDistance) AS Avg_Total_Distance,
+MIN(Calories) AS Min_Total_Calories,
+MAX(Calories) AS Max_Total_Calories,
+AVG(Calories) AS Avg_Total_Calories,
+MIN(VeryActiveMinutes) AS Min_Very_Active_Minutes,
+MAX(VeryActiveMinutes) AS Max_Very_Active_Minutes,
+AVG(VeryActiveMinutes) AS Avg_Very_Active_Minutes,
+MIN(FairlyActiveMinutes) AS Min_Fairly_Active_Minutes,
+MAX(FairlyActiveMinutes) AS Max_Fairly_Active_Minutes,
+AVG(FairlyActiveMinutes) AS Avg_Fairly_Active_Minutes,
+MIN(LightlyActiveMinutes) AS Min_Lightly_Active_Minutes,
+MAX(LightlyActiveMinutes) AS Max_Lightly_Active_Minutes,
+AVG(LightlyActiveMinutes) AS Avg_Lightly_Active_Minutes,
+MIN(SedentaryMinutes) AS Min_Sedentary_Minutes,
+MAX(SedentaryMinutes) AS Max_Sedentary_Minutes,
+AVG(SedentaryMinutes) AS Avg_Sedentary_Minutes
+From `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
+Group BY Id
+```
+Google Sheets Results link here 
+
+Then I wanted to narrow my results to just the averages of the different types of minutes by Id.
+
+```
+SELECT Id, 
+avg(VeryActiveMinutes) AS Avg_Very_Active_Minutes,
+avg(FairlyActiveMinutes) AS Avg_Fairly_Active_Minutes,
+avg(LightlyActiveMinutes) AS Avg_Lightly_Active_Minutes,
+avg(SedentaryMinutes) AS Avg_Sedentary_Minutes,
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
+GROUP BY Id
+```
+Google Sheets Results link here 
+
+Results showed that the average minutes of the Sedentary activity level was the highest for each distinct Id.
+
+Lastly, I wanted to take a look at average active minutes by week day before moving on to user types. In Google sheets I used the function "=CHOOSE(WEEKDAY(L2), "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")", in order to change the dates to days of the week.
+
+```
+SELECT Weekday,
+ROUND(avg(VeryActiveMinutes), 2) AS Avg_Very_Active_Minutes,
+ROUND(avg(FairlyActiveMinutes), 2) AS Avg_Fairly_Active_Minutes,
+ROUND(avg(LightlyActiveMinutes), 2) AS Avg_Lightly_Active_Minutes,
+ROUND(avg(SedentaryMinutes), 2) AS Avg_Sedentary_Minutes,
+FROM `eighth-breaker-387002.CS2_bellabeat.DailyActivityMergedWeekday`
+GROUP BY Weekday;
+```
+Google Sheets Results link here 
+[Link to Tableu] and/or post excel chart here
+
+Through this query we see that Sedentary Minutes are the highest type of active minutes. What is noticable is that there is no real difference in type of active minute total by week day. It seems users are consistent in their active minute output each day. This information could show that Bellabeat could leverage activity goals for users to meet as users might already being trying to meet personal activity goals each day and Bellabeat could enourage higher activity goals to increase daily active minutes that are very active or fairly active.
+
+4.4 User Types by Activity Levels 
+4.4.1
+According to the Australian Government, Department of Health and Aged Care, the physical activity and exercise guidelines for Australians aged 18-64 years old is to be active on most (preferably all) days, to weekly total minimum of: 2.5 hours of moderate activity or 1.25 hours of vigorous activity or an equivalent combination of both.   
+
+So minimum is 2.5h + 1.25h = 3.75h = 225 minutes
+
+Notation of SQL will use SUM() function to add together all 31 days then divide by 4 to obtain the 1 week total. 
+
+```
+SELECT Id, 
+SUM(VeryActiveMinutes)/4 + SUM(FairlyActiveMinutes)/4 AS Total_SUM_Active_Minutes,
+CASE 
+WHEN SUM(VeryActiveMinutes + FairlyActiveMinutes) >= 225 THEN 'Meets Recommended Australian Guidelines'
+WHEN SUM(VeryActiveMinutes + FairlyActiveMinutes) <225 THEN 'Does Not Meet Recommended Australian Guidelines'
+END Aus_Activity_Guidelines
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
+GROUP BY Id
+```
+Google Sheets Results link here 
+[Link to Tableu] and/or post excel chart here
+
+Of the 33 participants, 25 had met the Australian Guidelines, whereas the remaining 8 did not. 
+
+4.4.2
+A Healthline.com article (“How many steps do I need a day?”) written by Sara Lindberg in 2019 cited a 2011 study by Tudor-Locke et. al. titled “How many steps/day are enough? for adults” which found that 10,000 steps/day is a reasonable target for healthy adults. Lindberg (2019) breaks down activity level by steps into three categories based off the 2011 study by Tudor-Locke et. al.:
+
+Inactive: less than 4,000 steps per day
+Average (somewhat active): ranges from 7,500 to 9,999 steps per day
+Very Active: more than 13,500 steps per day
+
+I will be using the above activity categories to create user types for the distinct Ids within the Daily Activity dataset. I’m interested to see how these categories may be broken down. When creating my SQL query I realized that the above categories from the Healthline article left some gaps. So I created two other categories:
+
+Low Active User: 4,000 to 7,499 steps
+Active User: 10,000 to 13,499 steps
+
+```
+SELECT Id,
+round(avg(TotalSteps),2) AS Avg_Total_Steps,
+CASE
+WHEN avg(TotalSteps) < 4000 THEN 'Inactive'
+WHEN avg(TotalSteps) BETWEEN 4000 AND 7499 THEN 'Low Active User'
+WHEN avg(TotalSteps) BETWEEN 7500 AND 9999 THEN 'Average Active User'
+WHEN avg(TotalSteps) BETWEEN 10000 AND 13499 THEN 'Active User'
+WHEN avg(TotalSteps) >= 13500 THEN 'Very Active User'
+END User_Type
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
+GROUP BY Id
+```
+Google Sheets Results link here 
+[Link to Tableu] and/or post excel chart here
+
+Here are the Results:
+
+Inactive User: 8 users
+Low Active User: 9 users
+Average Active User: 9 users
+Active User: 5 users
+Very Active User: 2 users
+
+If we break this down between Non & Low Active users and users who are considered ‘Active’ we can see that 17 users (52%) are little to non-active and 16 (48%) users are considered active. So almost a 50/50 split on type of users.
+
+4.5 Calories, Steps & Active Minutes by ID
+Now that we have more insights into our users’ activity levels, I’m interested in seeing what their logged calories in relation to their steps and active minutes can tell us.
+```
+SELECT Id, 
+Sum(TotalSteps) AS Sum_total_steps,
+SUM(Calories) AS Sum_Calories, 
+SUM(VeryActiveMinutes + FairlyActiveMinutes) AS Sum_Active_Minutes
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
+GROUP BY Id
+```
+Google Sheets Results link here 
+[Link to Tableu] and/or post excel chart here
+
+4.6 Total Steps by Day
+Next, I wanted to take a look at average steps by day to see if users were more active on certain days of the week.
+
+```
+SELECT Weekday,
+ROUND (avg(TotalSteps), 2) AS Average_Total_Steps,
+FROM `eighth-breaker-387002.CS2_bellabeat.DailyActivityMergedWeekday`
+GROUP BY Weekday
+ORDER BY Average_Total_Steps DESC 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
