@@ -264,7 +264,46 @@ FROM `eighth-breaker-387002.CS2_bellabeat.DailyActivityMergedWeekday`
 GROUP BY Weekday
 ORDER BY Average_Total_Steps DESC 
 ```
+Google Sheets Results link here 
+[Link to Tableu] and/or post excel chart here
 
+After running the query, there wasn't a whole lot of difference between each day in terms of average steps. With that said, Saturday had the highest average steps as well as the beginning of each week (Monday and Tuesday). We could potentially infer from this that the users wanted to be more active right after the weekend of rest (Sunday with lowest total steps & Friday not too far behind) & that Saturday allowed for more time for activity & movement.
+
+4.7 Deeper look into Sleep
+Then I wanted to explore the Sleep habits of the users and how it compares to activity level.
+```
+SELECT a.Id,
+round(avg(a.TotalSteps),2) AS AvgTotalSteps,
+round(avg(a.Calories),2) AS AvgCalories,
+round(avg(s.TotalMinutesAsleep),2) AS AvgTotalMinutesAsleep,
+FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged` AS a
+INNER JOIN `eighth-breaker-387002.CS2_bellabeat.Sleep_Day_merged` AS s ON a.Id=s.Id
+GROUP BY a.Id 
+```
+Google Sheets Results link here 
+[Link to Tableu] and/or post excel chart here
+
+Then I visualized average total steps against average total minutes slept to see any type of correlation
+
+[Link to Tableu] and/or post excel chart here
+
+## 5. Share 
+My Complete dashboard on Tableu will be put here in due time.
+
+## 6. Act
+Bellabeat's women-centric, holistic approach paired with smart insights and body positivity has led to the creation of wearable technology for women. These products empower women to utilize data to improve their overall health.
+
+Since Bellabeat focuses strongly on a female audience for their products, I would recommend that the company look into using their own marketing and user data or conduct their own data collection to gain further insights and trends. I'd also recommend using a larger sample size if possible in order to increae the confidence interval. Since the data utilized in this case study did not include demographic information, I'm unable to give a more detailed recommendaion or ensure there was no sampling bias.
+
+App Notifications
+  - Through my analysis I found about 7% percent of users were 'low' or 'moderate' when it came to wearing their FitBits. While most of the users wore thier           FitBits consistently, I'd recommend a daily notification at the end of day to 'charge up' the wearable so it's ready for tracking the next day.
+
+  - The analysis also showed that 52% of users are not reaching the recommended 10,000 steps a day. Adding in notifications throughout the day as reminders to         "get up & move" or to "complete your step goal for the day" may help increase total steps for users.
+ 
+  - Lastly, the data showed that users who averaged 5 hours of sleep or more also had a higher average step total. It may be beneficial to help users increase        their sleep time by sending them a notification to 'wind down for sleep' at a certain time based off their sleep habits.
+
+Better Data Pipeline/Gathering
+  - Bella Beat should consider making it mandatory that all customers input certain information about themselves to better allow data analysts to manipulate data   more meaningfully. One example, is to make people input their height and weight before allowing access to their applications. This would provide Bella Beat       analyst greater access into the insights of their customers and will allow them to make more informed suggestions to their clients, as in the example given,       including height and weight would allow us to find other indicators such as BMI (which is Kg/M). This greater increase in information would allow bella beat       to  make better decisions moving forward in regards to marketing and product designing. 
 
 
 
