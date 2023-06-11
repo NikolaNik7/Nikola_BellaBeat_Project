@@ -118,6 +118,7 @@ FROM `eighth-breaker-387002.CS2_bellabeat.Daily_Activity_Merged`
 GROUP BY Id
 ```
 
+https://docs.google.com/spreadsheets/d/17FSZmmafb-hJfILoUGUe_IF7MJOvBrERI8lZaDt-luo/edit?usp=sharing
 https://public.tableau.com/app/profile/nikola.nikolic/viz/UsageDataBellabeat/Sheet1
 
 Next, I wanted to take a closer look at the MIN, MAX, & AVG of total steps, total distance, calories and activity levels by Id.
