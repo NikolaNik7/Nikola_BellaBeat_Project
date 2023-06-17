@@ -177,8 +177,7 @@ ROUND(avg(SedentaryMinutes), 2) AS Avg_Sedentary_Minutes,
 FROM `eighth-breaker-387002.CS2_bellabeat.DailyActivityMergedWeekday`
 GROUP BY Weekday;
 ```
-Google Sheets Results link here 
-[Link to Tableu] and/or post excel chart here
+https://public.tableau.com/app/profile/nikola.nikolic/viz/AVG_MIN_WEEKDAY_INTENSITY/Sheet1#1
 
 Through this query we see that Sedentary Minutes are the highest type of active minutes. What is noticable is that there is no real difference in type of active minute total by week day. It seems users are consistent in their active minute output each day. This information could show that Bellabeat could leverage activity goals for users to meet as users might already being trying to meet personal activity goals each day and Bellabeat could enourage higher activity goals to increase daily active minutes that are very active or fairly active.
 
