@@ -4,8 +4,6 @@ Author: Nikola Nikolic
 
 Date: 4/06/2023
 
-[Tableu Dashboard]
-
 This Project will follow the six step data analysis process: 
 ### ❓ [Ask](#1-ask)
 ### 💻 [Prepare](#2-prepare)
